@@ -2,11 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { PixelButton } from "@/components/ui/pixel-button";
-import { SoundPixelButton } from "@/components/ui/sound-pixel-button";
+import { PixelButton } from "@/components/ui/pixel-button"; // <--- SoundPixelButton se reemplazará por PixelButton
+// import { SoundPixelButton } from "@/components/ui/sound-pixel-button"; // <--- ELIMINAR ESTA LÍNEA
 import { StatBar } from "@/components/ui/stat-bar";
-import { ThemeToggle, SoundToggle } from "@/components/ui/theme-toggle";
-import { useSound } from "@/contexts/sound-context";
+import { ThemeToggle } from "@/components/ui/theme-toggle"; // <--- SoundToggle se eliminará
+// import { SoundToggle } from "@/components/ui/theme-toggle"; // <--- ELIMINAR ESTA LÍNEA
+// import { useSound } from "@/contexts/sound-context"; // <--- ELIMINAR ESTA LÍNEA
 
 interface NavItem {
   label: string;
@@ -23,7 +24,7 @@ const navItems: NavItem[] = [
 
 export function Navbar() {
   const [activeItem, setActiveItem] = useState("#home");
-  const { playSound } = useSound();
+  // const { playSound } = useSound(); // <--- ELIMINAR ESTA LÍNEA
 
   // Scroll progress - works as XP bar
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -54,7 +55,7 @@ export function Navbar() {
   }, []);
 
   const handleNavClick = (href: string) => {
-    playSound("navigate");
+    // playSound("navigate"); // <--- ELIMINAR ESTA LÍNEA
     setActiveItem(href);
   };
 
@@ -88,7 +89,7 @@ export function Navbar() {
                         : "text-foreground/70 hover:text-primary"
                     }`}
                     onClick={() => handleNavClick(item.href)}
-                    onMouseEnter={() => playSound("hover")}
+                    // onMouseEnter={() => playSound("hover")} // <--- ELIMINAR ESTA LÍNEA
                   >
                     {item.label}
                   </Link>
@@ -96,18 +97,18 @@ export function Navbar() {
               </div>
 
               <div className="flex items-center gap-1">
-                <SoundToggle className="hidden sm:block" />
+                {/* <SoundToggle className="hidden sm:block" /> */} {/* <--- ELIMINAR ESTA LÍNEA */}
                 <ThemeToggle className="hidden sm:block" />
 
-                <SoundPixelButton
+                <PixelButton // <--- CAMBIAR SoundPixelButton a PixelButton
                   variant="primary"
                   size="sm"
                   className="md:hidden"
-                  soundType="click"
+                  // soundType="click" // <--- ELIMINAR ESTA PROPIEDAD
                   onClick={() => alert('Mobile menu not implemented yet!')}
                 >
                   MENU
-                </SoundPixelButton>
+                </PixelButton>
               </div>
             </div>
           </div>

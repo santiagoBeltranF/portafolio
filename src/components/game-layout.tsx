@@ -4,7 +4,7 @@ import React from "react";
 import { Navbar } from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/theme-context";
-import { SoundToggle, ThemeToggle } from "@/components/ui/theme-toggle"; // <--- CORRECCIÓN AQUÍ
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 interface GameLayoutProps {
   children: React.ReactNode;
@@ -160,8 +160,9 @@ export function GameLayout({ children, className }: GameLayoutProps) {
               © {new Date().getFullYear()} Game Dev Portfolio. All rights reserved.
             </p>
 
+            {/* Mobile theme and sound toggles */}
             <div className="flex justify-center mt-4 gap-4 sm:hidden">
-              <SoundToggle />
+              {/* <SoundToggle /> */} {/* <--- ELIMINAR ESTA LÍNEA */}
               <ThemeToggle />
             </div>
           </div>

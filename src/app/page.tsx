@@ -6,7 +6,6 @@ import { DialogBox } from "@/components/ui/dialog-box";
 import { StatBar } from "@/components/ui/stat-bar";
 import { PixelButton } from "@/components/ui/pixel-button";
 import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 
 // Define skill data
 interface Skill {
@@ -84,7 +83,6 @@ const projects: Project[] = [
 export default function Home() {
   return (
     <GameLayout>
-      {/* Hero Section - Title Screen */}
       <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 bg-pixel-pattern" />
         <div className="game-container text-center relative z-10">
@@ -92,14 +90,14 @@ export default function Home() {
             <img
               src="/images/pixel-programmer.png"
               alt="Programmer Avatar"
-              className="w-32 h-32 mx-auto object-contain"
+              className="w-65 h-65 mx-auto object-contain"
             />
           </div>
           <h1 className="text-4xl md:text-6xl font-pixel text-primary mb-4">
             DEV <span className="text-foreground">QUEST</span>
           </h1>
           <p className="text-lg md:text-xl font-pixel text-muted-foreground mb-8">
-            A Programmer&apos;s Portfolio Adventure
+            A Programmer's Portfolio Adventure
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 justify-center">

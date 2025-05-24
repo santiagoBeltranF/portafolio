@@ -1,7 +1,6 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useSound } from "./sound-context";
 
 type Theme = "light" | "dark";
 
@@ -16,7 +15,6 @@ const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
   const [isThemeLoaded, setIsThemeLoaded] = useState(false);
-  const { playSound } = useSound();
 
   useEffect(() => {
     // Initialize theme from localStorage or system preference
@@ -52,7 +50,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const toggleTheme = () => {
     setTheme(prev => (prev === "light" ? "dark" : "light"));
-    playSound("toggle");
   };
 
   return (
