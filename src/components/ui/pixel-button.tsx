@@ -1,5 +1,5 @@
+
 import type React from "react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface PixelButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,7 +20,7 @@ export function PixelButton({
   const variantClasses = {
     primary: "bg-primary text-primary-foreground hover:bg-primary/90",
     secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
-    outline: "border-2 border-primary bg-background hover:bg-primary/10",
+    outline: "border-2 border-primary bg-background text-foreground hover:bg-primary/10 hover:text-primary",
     destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
   };
 
