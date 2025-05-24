@@ -94,7 +94,7 @@ export default function Home() {
             />
           </div>
           <h1 className="text-4xl md:text-6xl font-pixel text-primary mb-4">
-            DEV <span className="text-foreground">QUEST</span>
+            SANTIAGO <span className="text-foreground">BELTRAN</span>
           </h1>
           <p className="text-lg md:text-xl font-pixel text-muted-foreground mb-8">
             A Programmer's Portfolio Adventure

@@ -74,7 +74,7 @@ export function Navbar() {
                 alt="Logo"
                 className="w-8 h-8 object-contain"
               />
-              <span className="text-lg font-pixel text-primary">DEV QUEST</span>
+              <span className="text-lg font-pixel text-primary">SANTIAGO</span>
             </Link>
 
             <div className="flex items-center gap-2">

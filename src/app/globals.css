@@ -1,4 +1,3 @@
-/* Import pixel font */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 @tailwind base;
@@ -10,14 +9,13 @@
     --background: 0 100% 98%;
     --foreground: 0 0% 12%;
 
-    /* Pastel red themed color palette */
-    --primary: 355 80% 80%; /* Main pastel red */
+    --primary: 0 85% 60%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 355 30% 90%; /* Lighter pastel red */
+    --secondary: 0 40% 92%;
     --secondary-foreground: 0 0% 12%;
 
-    --accent: 355 70% 75%; /* More saturated pastel red */
+    --accent: 0 90% 55%;
     --accent-foreground: 0 0% 98%;
 
     --card: 0 0% 100%;
@@ -26,21 +24,20 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 12%;
 
-    --muted: 355 20% 92%;
+    --muted: 0 30% 94%;
     --muted-foreground: 0 0% 45%;
 
     --destructive: 0 85% 65%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 355 30% 85%;
-    --input: 355 30% 85%;
+    --border: 0 50% 88%;
+    --input: 0 50% 88%;
 
-    --ring: 355 70% 75%;
+    --ring: 0 90% 55%;
 
     --radius: 0.5rem;
 
-    /* Game UI themed colors */
-    --health: 355 80% 70%;
+    --health: 0 80% 65%;
     --mana: 210 80% 70%;
     --experience: 50 80% 70%;
     --skill: 150 80% 70%;
@@ -50,13 +47,13 @@
     --background: 0 10% 10%;
     --foreground: 0 0% 98%;
 
-    --primary: 355 70% 70%;
+    --primary: 0 75% 55%;
     --primary-foreground: 0 0% 98%;
 
-    --secondary: 355 30% 25%;
+    --secondary: 0 35% 25%;
     --secondary-foreground: 0 0% 98%;
 
-    --accent: 355 60% 60%;
+    --accent: 0 80% 50%;
     --accent-foreground: 0 0% 98%;
 
     --card: 0 10% 15%;
@@ -65,16 +62,18 @@
     --popover: 0 10% 15%;
     --popover-foreground: 0 0% 98%;
 
-    --muted: 355 20% 20%;
+    --muted: 0 25% 20%;
     --muted-foreground: 0 0% 65%;
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 355 30% 30%;
-    --input: 355 30% 30%;
+    --border: 0 40% 30%;
+    --input: 0 40% 30%;
 
-    --ring: 355 70% 60%;
+    --ring: 0 80% 50%;
+
+    --health: 0 70% 50%;
   }
 }
 
@@ -88,7 +87,6 @@
   }
 }
 
-/* Pixel art styling */
 @layer components {
   .pixel-corners {
     clip-path: polygon(
@@ -145,7 +143,6 @@
   }
 }
 
-/* Animation for blinking text cursor */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
