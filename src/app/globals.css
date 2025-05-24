@@ -1,0 +1,156 @@
+/* Import pixel font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 100% 98%;
+    --foreground: 0 0% 12%;
+
+    /* Pastel red themed color palette */
+    --primary: 355 80% 80%; /* Main pastel red */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 355 30% 90%; /* Lighter pastel red */
+    --secondary-foreground: 0 0% 12%;
+
+    --accent: 355 70% 75%; /* More saturated pastel red */
+    --accent-foreground: 0 0% 98%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 12%;
+
+    --muted: 355 20% 92%;
+    --muted-foreground: 0 0% 45%;
+
+    --destructive: 0 85% 65%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 355 30% 85%;
+    --input: 355 30% 85%;
+
+    --ring: 355 70% 75%;
+
+    --radius: 0.5rem;
+
+    /* Game UI themed colors */
+    --health: 355 80% 70%;
+    --mana: 210 80% 70%;
+    --experience: 50 80% 70%;
+    --skill: 150 80% 70%;
+  }
+
+  .dark {
+    --background: 0 10% 10%;
+    --foreground: 0 0% 98%;
+
+    --primary: 355 70% 70%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 355 30% 25%;
+    --secondary-foreground: 0 0% 98%;
+
+    --accent: 355 60% 60%;
+    --accent-foreground: 0 0% 98%;
+
+    --card: 0 10% 15%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 10% 15%;
+    --popover-foreground: 0 0% 98%;
+
+    --muted: 355 20% 20%;
+    --muted-foreground: 0 0% 65%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 355 30% 30%;
+    --input: 355 30% 30%;
+
+    --ring: 355 70% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Pixel art styling */
+@layer components {
+  .pixel-corners {
+    clip-path: polygon(
+      0% 4px, 4px 4px, 4px 0%, calc(100% - 4px) 0%, calc(100% - 4px) 4px,
+      100% 4px, 100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px),
+      calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0% calc(100% - 4px)
+    );
+  }
+
+  .pixel-text {
+    font-family: 'Press Start 2P', monospace;
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    letter-spacing: 1px;
+  }
+
+  .game-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    image-rendering: pixelated;
+  }
+
+  .health-bar {
+    @apply bg-gradient-to-r from-[#ff6b6b] to-[#ff9999] border-2 border-[#333];
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px rgba(255, 0, 0, 0.2);
+  }
+
+  .mana-bar {
+    @apply bg-gradient-to-r from-[#4d79ff] to-[#80a3ff] border-2 border-[#333];
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px rgba(0, 0, 255, 0.2);
+  }
+
+  .xp-bar {
+    @apply bg-gradient-to-r from-[#ffd166] to-[#ffe066] border-2 border-[#333];
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px rgba(255, 204, 0, 0.2);
+  }
+
+  .skill-bar {
+    @apply bg-gradient-to-r from-[#06d6a0] to-[#50efcb] border-2 border-[#333];
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 10px rgba(0, 255, 128, 0.2);
+  }
+
+  .pixel-button {
+    @apply bg-primary text-primary-foreground font-bold py-2 px-4 pixel-corners border-2 border-[#333] transition-all;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .pixel-button:hover {
+    @apply translate-y-1 translate-x-1;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .dialog-box {
+    @apply bg-background border-4 border-primary p-6 pixel-corners;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Animation for blinking text cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
