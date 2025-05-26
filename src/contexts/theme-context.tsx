@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
+import { useSoundEffect } from "@/hooks/useSoundEffect";
 
 type Theme = "light" | "dark";
 
@@ -15,9 +16,13 @@ const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
   const [isThemeLoaded, setIsThemeLoaded] = useState(false);
+  const { playSound, preloadSound } = useSoundEffect({ volume: 0.4 });
 
   useEffect(() => {
-    // Initialize theme from localStorage or system preference
+    preloadSound('/sounds/snap.mp3');
+  }, [preloadSound]);
+
+  useEffect(() => {
     const storedTheme = localStorage.getItem("theme") as Theme | null;
     const systemPrefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 
@@ -26,31 +31,27 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     } else if (systemPrefersDark) {
       setTheme("dark");
     }
-
     setIsThemeLoaded(true);
   }, []);
 
   useEffect(() => {
     if (!isThemeLoaded) return;
 
-    // Update document class when theme changes
     const root = document.documentElement;
     if (theme === "dark") {
       root.classList.add("dark");
     } else {
       root.classList.remove("dark");
     }
-
-    // Save theme preference to localStorage
     localStorage.setItem("theme", theme);
-
-    // Add a transition effect to the page
     document.body.style.transition = "background-color 0.5s ease, color 0.5s ease";
+
   }, [theme, isThemeLoaded]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
+    playSound("themeChange");
     setTheme(prev => (prev === "light" ? "dark" : "light"));
-  };
+  }, [playSound]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme, isThemeLoaded }}>

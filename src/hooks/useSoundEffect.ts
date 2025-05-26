@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react';
 
-type SoundType = 'click' | 'navigate' | 'hover';
+type SoundType = 'click' | 'navigate' | 'hover' | 'themeChange';
 
 interface UseSoundEffectProps {
   volume?: number;
@@ -29,6 +29,9 @@ export function useSoundEffect(props?: UseSoundEffectProps) {
             soundFile = '/sounds/mouse_click.mp3';
             break;
           case 'hover':
+            break;
+          case 'themeChange':
+            soundFile = '/sounds/snap.mp3';
             break;
         }
 
