@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/theme-context";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Github, Linkedin } from "lucide-react";
 
 interface GameLayoutProps {
   children: React.ReactNode;
@@ -16,9 +17,7 @@ export function GameLayout({ children, className }: GameLayoutProps) {
 
   return (
     <div className="min-h-screen flex flex-col relative">
-      {/* Day/Night cycle animation */}
       <div className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-700">
-        {/* Stars (only visible in dark mode) */}
         <div
           className={cn(
             "absolute inset-0 transition-opacity duration-700",
@@ -33,7 +32,7 @@ export function GameLayout({ children, className }: GameLayoutProps) {
 
             return (
               <div
-                key={i}
+                key={`star-bg-${i}`}
                 className="absolute bg-white rounded-full"
                 style={{
                   width: `${size}px`,
@@ -41,14 +40,13 @@ export function GameLayout({ children, className }: GameLayoutProps) {
                   top: `${top}%`,
                   left: `${left}%`,
                   opacity: Math.random() * 0.7 + 0.3,
-                  animation: `pulse-pixel ${animationDuration}s infinite`
+                  animation: `pulse-pixel ${animationDuration}s infinite`,
                 }}
               />
             );
           })}
         </div>
 
-        {/* Clouds (only visible in light mode) */}
         <div
           className={cn(
             "absolute inset-0 transition-opacity duration-700",
@@ -63,7 +61,7 @@ export function GameLayout({ children, className }: GameLayoutProps) {
 
             return (
               <div
-                key={i}
+                key={`cloud-bg-${i}`}
                 className="absolute bg-white rounded-full"
                 style={{
                   width: `${width}px`,
@@ -78,13 +76,12 @@ export function GameLayout({ children, className }: GameLayoutProps) {
           })}
         </div>
 
-        {/* Color overlay for day/night */}
         <div
           className={cn(
-            "absolute inset-0 transition-opacity duration-700",
+            "absolute inset-0 transition-colors duration-700",
             theme === "dark"
-              ? "bg-gradient-to-b from-[#0f172a]/30 to-[#0f172a]/0 opacity-100"
-              : "bg-gradient-to-b from-[#ffedeb]/30 to-[#ffedeb]/0 opacity-0"
+              ? "bg-gradient-to-b from-[#0f172a]/50 to-transparent opacity-100"
+              : "bg-gradient-to-b from-sky-300/30 to-transparent opacity-100"
           )}
         />
       </div>
@@ -93,78 +90,91 @@ export function GameLayout({ children, className }: GameLayoutProps) {
       <main className={cn("flex-1 pt-20 relative z-10", className)}>
         {children}
       </main>
-      <footer className="bg-muted border-t-2 border-primary/30 py-4 mt-16 relative z-10">
-        <div className="game-container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center md:text-left">
-              <h3 className="font-pixel text-sm text-primary mb-2">GAME DEV PORTFOLIO</h3>
-              <p className="text-xs text-muted-foreground">A showcase of coding skills and projects.</p>
+      
+      <footer className="relative z-10 mt-24 border-t-4 border-primary/50 bg-background/70 backdrop-blur-sm shadow-2xl shadow-primary/20">
+        <div 
+          className="absolute inset-x-0 top-0 h-2 bg-repeat-x opacity-50"
+          style={{
+            backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='20' height='10' viewBox='0 0 20 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L10 10 L20 0 Z' fill='%23FF7D7D'/%3E%3C/svg%3E\")",
+            backgroundSize: '20px 10px',
+          }}
+        />
+        <div className="game-container py-12 px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
+            
+            <div className="text-center md:text-left flex flex-col items-center md:items-start">
+              <div className="flex items-center gap-3 mb-3">
+                <img src="/images/pixel-programmer.png" alt="Logo" className="w-10 h-10 object-contain" />
+                <h3 className="font-pixel text-xl text-primary">SANTIAGO BELTRAN</h3>
+              </div>
+              <p className="text-sm text-muted-foreground font-pixel tracking-wider">
+                Level Up Your Digital Presence.
+              </p>
             </div>
 
             <div className="text-center">
-              <h3 className="font-pixel text-sm text-primary mb-2">QUICK LINKS</h3>
-              <div className="flex flex-col space-y-1">
-                <a href="#home" className="text-xs hover:text-primary transition-colors">Home</a>
-                <a href="#about" className="text-xs hover:text-primary transition-colors">About</a>
-                <a href="#skills" className="text-xs hover:text-primary transition-colors">Skills</a>
-                <a href="#projects" className="text-xs hover:text-primary transition-colors">Projects</a>
-                <a href="#contact" className="text-xs hover:text-primary transition-colors">Contact</a>
+              <h3 className="font-pixel text-lg text-primary mb-4 border-b-2 border-primary/30 pb-2 inline-block">
+                NAVIGATION
+              </h3>
+              <div className="flex flex-col space-y-2 items-center">
+                {['#home', '#about', '#skills', '#projects', '#contact'].map(link => (
+                  <a 
+                    key={link}
+                    href={link} 
+                    className="font-pixel text-sm text-foreground/80 hover:text-primary hover:translate-x-1 transition-all duration-200 ease-in-out group"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const targetId = link.substring(1);
+                      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }}
+                  >
+                    <span className="group-hover:text-accent mr-1 transition-colors duration-200">{'>'}</span> {link.substring(1).toUpperCase()}
+                  </a>
+                ))}
               </div>
             </div>
 
-            <div className="text-center md:text-right">
-              <h3 className="font-pixel text-sm text-primary mb-2">CONNECT</h3>
-              <div className="flex justify-center md:justify-end gap-3">
+            <div className="text-center md:text-right flex flex-col items-center md:items-end">
+              <h3 className="font-pixel text-lg text-primary mb-4">CONNECT</h3>
+              <div className="flex justify-center md:justify-end gap-5 mb-6">
                 <a
-                  href="https://github.com"
+                  href="https://github.com/santiagoBeltranF"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
+                  className="text-foreground/70 hover:text-primary transition-transform duration-200 hover:scale-125 group"
                   aria-label="Github"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-                    <path d="M9 18c-4.51 2-5-2-7-2" />
-                  </svg>
+                  <Github className="w-8 h-8 " />
+                  <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs bg-card text-card-foreground px-2 py-1 rounded-md shadow-lg font-pixel">
+                    GitHub
+                  </span>
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/santiago-beltran-florez-4890052b4/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
+                  className="text-foreground/70 hover:text-primary transition-transform duration-200 hover:scale-125 group"
                   aria-label="LinkedIn"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                    <rect width="4" height="12" x="2" y="9" />
-                    <circle cx="4" cy="4" r="2" />
-                  </svg>
+                  <Linkedin className="w-8 h-8" />
+                   <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs bg-card text-card-foreground px-2 py-1 rounded-md shadow-lg font-pixel">
+                    LinkedIn
+                  </span>
                 </a>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-primary transition-colors"
-                  aria-label="Twitter"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                  </svg>
-                </a>
+              </div>
+              <div className="flex justify-center md:justify-end mt-4 gap-4 sm:hidden">
+                <ThemeToggle />
               </div>
             </div>
           </div>
 
-          <div className="mt-8 text-center">
-            <p className="text-xs text-muted-foreground">
-              © {new Date().getFullYear()} Game Dev Portfolio. All rights reserved.
+          <div className="mt-12 pt-8 border-t-2 border-primary/20 text-center">
+            <p className="text-xs text-muted-foreground font-pixel">
+              © {new Date().getFullYear()} SANTIAGO BELTRAN. ALL RIGHTS RESERVED.
             </p>
-
-            {/* Mobile theme and sound toggles */}
-            <div className="flex justify-center mt-4 gap-4 sm:hidden">
-              {/* <SoundToggle /> */} {/* <--- ELIMINAR ESTA LÍNEA */}
-              <ThemeToggle />
-            </div>
+            <p className="text-xs text-muted-foreground/70 mt-1">
+              Designed & Coded with <span className="text-red-500 animate-pulse">❤</span> and Pixels.
+            </p>
           </div>
         </div>
       </footer>

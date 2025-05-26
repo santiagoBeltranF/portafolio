@@ -1,4 +1,3 @@
-
 import type React from "react";
 import { cn } from "@/lib/utils";
 
@@ -15,7 +14,7 @@ export function PixelButton({
   className,
   ...props
 }: PixelButtonProps) {
-  const baseClasses = "pixel-button font-pixel transition-all";
+  const baseClasses = "pixel-button font-pixel transition-all inline-flex items-center justify-center gap-2"; 
 
   const variantClasses = {
     primary: "bg-primary text-primary-foreground hover:bg-primary/90",
