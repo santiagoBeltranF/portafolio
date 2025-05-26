@@ -1,23 +1,85 @@
 export interface Skill {
-  name: string;
-  level: number;
-  category: "frontend" | "backend" | "languages" | "tools";
-  icon?: string;
+  title: string;
+  dataLevel: number;
+  levelText: string;
+  category: "frontend" | "backend";
+  icon: string;
+  description?: string;
 }
 
 export const skillsData: Skill[] = [
-  { name: "JavaScript", level: 90, category: "languages" },
-  { name: "TypeScript", level: 85, category: "languages" },
-  { name: "React", level: 92, category: "frontend" },
-  { name: "Next.js", level: 88, category: "frontend" },
-  { name: "CSS/SCSS", level: 85, category: "frontend" },
-  { name: "Node.js", level: 80, category: "backend" },
-  { name: "Express", level: 75, category: "backend" },
-  { name: "MongoDB", level: 70, category: "backend" },
-  { name: "PostgreSQL", level: 65, category: "backend" },
-  { name: "Git", level: 85, category: "tools" },
-  { name: "Docker", level: 70, category: "tools" },
-  { name: "Figma", level: 65, category: "tools" },
+  {
+    title: 'ANGULAR',
+    levelText: 'Intermedio',
+    dataLevel: 70,
+    category: "frontend",
+    icon: "/skills_icon/angular-logo.png",
+    description: "Framework potente para construir aplicaciones web complejas y SPA."
+  },
+  {
+    title: 'REACT',
+    levelText: 'Intermedio',
+    dataLevel: 65,
+    category: "frontend",
+    icon: "/skills_icon/react-logo.png",
+    description: "Biblioteca JS para interfaces de usuario interactivas y componentes reutilizables."
+  },
+  {
+    title: 'HTML & CSS',
+    levelText: 'Experto',
+    dataLevel: 90,
+    category: "frontend",
+    icon: "/skills_icon/html-css-logo.png",
+    description: "Fundamentos esenciales para la estructura y estilo de la web."
+  },
+  {
+    title: 'Java',
+    levelText: 'Intermedio',
+    dataLevel: 65,
+    category: "backend",
+    icon: "/skills_icon/java-logo.png",
+    description: "Lenguaje robusto y versátil para aplicaciones empresariales y de servidor."
+  },
+  {
+    title: 'PYTHON',
+    levelText: 'Competente',
+    dataLevel: 85,
+    category: "backend",
+    icon: "/skills_icon/python-logo.png",
+    description: "Lenguaje popular para desarrollo web backend, scripting y ciencia de datos."
+  },
+  {
+    title: 'JavaScript',
+    levelText: 'Intermedio',
+    dataLevel: 70,
+    category: "backend",
+    icon: "/skills_icon/javascript-logo.png",
+    description: "Uso de JavaScript en el servidor con Node.js para APIs y microservicios."
+  },
+  {
+    title: 'SQL',
+    levelText: 'Competente',
+    dataLevel: 80,
+    category: "backend",
+    icon: "/skills_icon/sql-logo.png",
+    description: "Gestión y consulta de bases de datos relacionales."
+  },
+  {
+    title: 'DOCKER',
+    levelText: 'Uso Regular',
+    dataLevel: 60,
+    category: "backend",
+    icon: "/skills_icon/docker-logo.png",
+    description: "Contenerización de aplicaciones para despliegues consistentes."
+  },
+  {
+    title: 'GIT',
+    levelText: 'Uso Diario',
+    dataLevel: 90,
+    category: "backend",
+    icon: "/skills_icon/git-logo.png",
+    description: "Control de versiones esencial para el desarrollo colaborativo."
+  }
 ];
 
 export interface Project {
