@@ -52,19 +52,11 @@ export function AboutSection() {
               <div className="mt-6 grid grid-cols-2 gap-3">
                 <div className="bg-muted p-3 rounded-sm text-center">
                   <p className="text-xs font-pixel">Projects</p>
-                  <p className="text-lg font-bold">42</p>
-                </div>
-                <div className="bg-muted p-3 rounded-sm text-center">
-                  <p className="text-xs font-pixel">Clients</p>
-                  <p className="text-lg font-bold">15</p>
+                  <p className="text-lg font-bold">5</p>
                 </div>
                 <div className="bg-muted p-3 rounded-sm text-center">
                   <p className="text-xs font-pixel">Years</p>
-                  <p className="text-lg font-bold">5+</p>
-                </div>
-                <div className="bg-muted p-3 rounded-sm text-center">
-                  <p className="text-xs font-pixel">Coffees</p>
-                  <p className="text-lg font-bold">∞</p>
+                  <p className="text-lg font-bold">1.5+</p>
                 </div>
               </div>
             </div>
@@ -74,7 +66,7 @@ export function AboutSection() {
             <h2 className="text-2xl font-pixel text-primary mb-6">CHARACTER PROFILE</h2>
 
             <DialogBox
-              text="Greetings, adventurer! I'm a passionate software developer with expertise in building modern web applications. I specialize in frontend development with React and Next.js, but I'm also skilled in backend technologies like Node.js and various databases."
+              text="Greetings, adventurer! I'm a passionate software developer with experience in building modern web applications. I specialize in frontend development with Angular, but I am also skilled in backend technologies such as Java and various databases."
               speaker="Developer"
               avatar="/images/pixel-programmer.png"
               className="mb-6"
@@ -83,7 +75,7 @@ export function AboutSection() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
               <Card className="p-4 pixel-corners">
                 <h3 className="font-pixel text-primary text-sm mb-2">BACKGROUND</h3>
-                <p className="text-sm">5+ years of experience in web development with a focus on creating accessible, performant, and visually appealing applications.</p>
+                <p className="text-sm">Over 1.5 years of experience in web development, with a strong background in both frontend and backend. My primary focus is on creating accessible, performant, and visually appealing applications, managing the development of end-to-end solutions.</p>
               </Card>
 
               <Card className="p-4 pixel-corners">
@@ -101,12 +93,14 @@ export function AboutSection() {
               </Card>
 
               <Card className="p-4 pixel-corners">
-                <h3 className="font-pixel text-primary text-sm mb-2">INTERESTS</h3>
-                <ul className="text-sm space-y-1">
-                  <li>• Game Development</li>
-                  <li>• UI/UX Design</li>
-                  <li>• Open Source Contribution</li>
-                </ul>
+                  <h3 className="font-pixel text-primary text-sm mb-2">MICROSERVICES EXPERTISE</h3>
+                  <ul className="text-sm space-y-1">
+                      <li>• Microservices Architecture & Design</li>
+                      <li>• API Development</li>
+                      <li>• Containerization</li>
+                      <li>• Distributed Systems & Scalability</li>
+                      <li>• UI/UX Design</li>
+                  </ul>
               </Card>
             </div>
           </div>
