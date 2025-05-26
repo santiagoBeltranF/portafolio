@@ -5,20 +5,7 @@ import Link from "next/link";
 import { PixelButton } from "@/components/ui/pixel-button";
 import { StatBar } from "@/components/ui/stat-bar";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { cn } from "@/lib/utils";
-
-interface NavItem {
-  label: string;
-  href: string;
-}
-
-const navItems: NavItem[] = [
-  { label: "HOME", href: "#home" },
-  { label: "ABOUT", href: "#about" },
-  { label: "SKILLS", href: "#skills" },
-  { label: "PROJECTS", href: "#projects" },
-  { label: "CONTACT", href: "#contact" },
-];
+import { useSoundEffect } from "@/hooks/useSoundEffect";
 
 const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -57,11 +44,28 @@ const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const navItems: NavItem[] = [
+  { label: "HOME", href: "#home" },
+  { label: "ABOUT", href: "#about" },
+  { label: "SKILLS", href: "#skills" },
+  { label: "PROJECTS", href: "#projects" },
+  { label: "CONTACT", href: "#contact" },
+];
 
 export function Navbar() {
   const [activeItem, setActiveItem] = useState("#home");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { playSound, preloadSound } = useSoundEffect({ volume: 0.3 });
+
+  useEffect(() => {
+    preloadSound('/sounds/mouse_click.mp3');
+  }, [preloadSound]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,38 +75,46 @@ export function Navbar() {
       setScrollProgress(progress);
 
       const sections = document.querySelectorAll('section[id]');
-      let currentActive = "#home";
+      let currentActive = activeItem;
 
-      for (const section of sections) {
-        const sectionTop = (section as HTMLElement).offsetTop - 150;
-        const sectionHeight = (section as HTMLElement).offsetHeight;
-        const sectionId = `#${section.getAttribute('id')}`;
-
-        if (position >= sectionTop && position < sectionTop + sectionHeight) {
-          currentActive = sectionId;
-          break;
+      if (position < (document.getElementById('about')?.offsetTop ?? 200) - 150) {
+        currentActive = "#home";
+      } else {
+        for (const section of sections) {
+          const sectionEl = section as HTMLElement;
+          const sectionTop = sectionEl.offsetTop - 150;
+          const sectionBottom = sectionTop + sectionEl.offsetHeight;
+          
+          if (position >= sectionTop && position < sectionBottom) {
+            currentActive = `#${sectionEl.id}`;
+            break;
+          }
         }
       }
+      
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
         const lastSection = sections[sections.length - 1];
         if (lastSection) {
             currentActive = `#${lastSection.getAttribute('id')}`;
         }
       }
-      setActiveItem(currentActive);
+      if (activeItem !== currentActive) {
+        setActiveItem(currentActive);
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [activeItem]);
 
-  const handleNavClick = (href: string) => {
-    setActiveItem(href);
-    setIsMobileMenuOpen(false);
+  const handleNavClick = (href: string, event?: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+    if (event) event.preventDefault();
+    playSound("navigate");
+    
     const element = document.querySelector(href);
     if (element) {
-      const headerOffset = 100;
+      const headerOffset = 80;
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
       const offsetPosition = elementPosition - headerOffset;
 
@@ -110,10 +122,13 @@ export function Navbar() {
         top: offsetPosition,
         behavior: "smooth"
       });
+      setActiveItem(href);
     }
+    setIsMobileMenuOpen(false);
   };
 
   const toggleMobileMenu = () => {
+    playSound("click");
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
@@ -123,10 +138,10 @@ export function Navbar() {
         <div className="game-container py-2">
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
-              <Link
+              <a
                 href="#home"
-                className="flex items-center gap-2"
-                onClick={() => handleNavClick("#home")}
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={(e) => handleNavClick("#home", e)}
               >
                 <img
                   src="/images/pixel-programmer.png"
@@ -134,7 +149,7 @@ export function Navbar() {
                   className="w-8 h-8 object-contain"
                 />
                 <span className="text-lg font-pixel text-primary">SANTIAGO</span>
-              </Link>
+              </a>
 
               <nav className="hidden md:flex items-center gap-4">
                 {navItems.map((item) => (
@@ -146,10 +161,7 @@ export function Navbar() {
                         ? "text-primary border-b-2 border-primary"
                         : "text-foreground/70 hover:text-primary"
                     }`}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.href);
-                    }}
+                    onClick={(e) => handleNavClick(item.href, e)}
                   >
                     {item.label}
                   </a>
@@ -158,7 +170,6 @@ export function Navbar() {
 
               <div className="flex items-center gap-1">
                 <ThemeToggle className="hidden sm:block" />
-
                 <PixelButton
                   variant="primary"
                   size="sm"
@@ -186,10 +197,12 @@ export function Navbar() {
       </header>
 
       {isMobileMenuOpen && (
-        <nav className="md:hidden fixed top-[84px] left-0 w-full bg-background/95 backdrop-blur-sm shadow-lg z-40 border-b-2 border-primary/30">
+        <nav 
+            className="md:hidden fixed top-[84px] left-0 w-full bg-background/95 backdrop-blur-sm shadow-lg z-40 border-b-2 border-primary/30 animate-in fade-in-20 slide-in-from-top-6 duration-300"
+        >
           <div className="game-container flex flex-col items-center py-4 space-y-3">
             {navItems.map((item) => (
-              <a
+              <a 
                 key={item.href}
                 href={item.href}
                 className={`text-lg font-pixel py-2 transition-colors w-full text-center ${
@@ -197,10 +210,7 @@ export function Navbar() {
                     ? "text-primary"
                     : "text-foreground/80 hover:text-primary"
                 }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(item.href);
-                }}
+                onClick={(e) => handleNavClick(item.href, e)}
               >
                 {item.label}
               </a>

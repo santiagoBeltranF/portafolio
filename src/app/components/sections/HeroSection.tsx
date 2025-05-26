@@ -2,8 +2,25 @@
 
 import React from "react";
 import { PixelButton } from "@/components/ui/pixel-button";
+import { useSoundEffect } from "@/hooks/useSoundEffect";
 
 export function HeroSection() {
+  const { playSound, preloadSound } = useSoundEffect({ volume: 0.3 });
+
+  React.useEffect(() => {
+    preloadSound('/sounds/mouse_click.mp3');
+  }, [preloadSound]);
+
+  const handleStartGameClick = () => {
+    playSound("click");
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleContactClick = () => {
+    playSound("click");
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-secondary/30 relative overflow-hidden">
       <div className="absolute inset-0 opacity-5 bg-pixel-pattern" />
@@ -12,7 +29,7 @@ export function HeroSection() {
           <img
             src="/images/pixel-programmer.png"
             alt="Programmer Avatar"
-            className="w-65 h-65 mx-auto object-contain"
+            className="w-96 h-96 mx-auto object-contain"
           />
         </div>
         <h1 className="text-4xl md:text-6xl font-pixel text-primary mb-4">
@@ -24,14 +41,14 @@ export function HeroSection() {
 
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <PixelButton
-            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={handleStartGameClick}
             size="lg"
           >
             START GAME
           </PixelButton>
           <PixelButton
             variant="outline"
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={handleContactClick}
             size="lg"
           >
             CONTACT
