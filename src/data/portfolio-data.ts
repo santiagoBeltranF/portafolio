@@ -1,90 +1,92 @@
+import type { TranslationKey } from "@/contexts/i18n-context";
+
 export interface Skill {
-  title: string;
+  titleKey: TranslationKey;
   dataLevel: number;
-  levelText: string;
+  levelTextKey: TranslationKey;
   category: "frontend" | "backend";
   icon: string;
-  description?: string;
+  descriptionKey?: TranslationKey;
 }
 
 export const skillsData: Skill[] = [
   {
-    title: 'ANGULAR',
-    levelText: 'Intermedio',
+    titleKey: 'skills.angular.title',
+    levelTextKey: 'levels.intermediate',
     dataLevel: 70,
     category: "frontend",
     icon: "/skills_icon/angular-logo.png",
-    description: "Framework potente para construir aplicaciones web complejas y SPA."
+    descriptionKey: "skills.angular.description"
   },
   {
-    title: 'REACT',
-    levelText: 'Intermedio',
+    titleKey: 'skills.react.title',
+    levelTextKey: 'levels.intermediate',
     dataLevel: 65,
     category: "frontend",
     icon: "/skills_icon/react-logo.png",
-    description: "Biblioteca JS para interfaces de usuario interactivas y componentes reutilizables."
+    descriptionKey: "skills.react.description"
   },
   {
-    title: 'HTML & CSS',
-    levelText: 'Experto',
+    titleKey: 'skills.htmlcss.title',
+    levelTextKey: 'levels.expert',
     dataLevel: 90,
     category: "frontend",
     icon: "/skills_icon/html-css-logo.png",
-    description: "Fundamentos esenciales para la estructura y estilo de la web."
+    descriptionKey: "skills.htmlcss.description"
   },
   {
-    title: 'Java',
-    levelText: 'Intermedio',
+    titleKey: 'skills.java.title',
+    levelTextKey: 'levels.intermediate',
     dataLevel: 65,
     category: "backend",
     icon: "/skills_icon/java-logo.png",
-    description: "Lenguaje robusto y versátil para aplicaciones empresariales y de servidor."
+    descriptionKey: "skills.java.description"
   },
   {
-    title: 'PYTHON',
-    levelText: 'Competente',
+    titleKey: 'skills.python.title',
+    levelTextKey: 'levels.competent',
     dataLevel: 85,
     category: "backend",
     icon: "/skills_icon/python-logo.png",
-    description: "Lenguaje popular para desarrollo web backend, scripting y ciencia de datos."
+    descriptionKey: "skills.python.description"
   },
   {
-    title: 'JavaScript',
-    levelText: 'Intermedio',
+    titleKey: 'skills.javascript.title',
+    levelTextKey: 'levels.intermediate',
     dataLevel: 70,
     category: "backend",
     icon: "/skills_icon/javascript-logo.png",
-    description: "Uso de JavaScript en el servidor con Node.js para APIs y microservicios."
+    descriptionKey: "skills.javascript.description"
   },
   {
-    title: 'SQL',
-    levelText: 'Competente',
+    titleKey: 'skills.sql.title',
+    levelTextKey: 'levels.competent',
     dataLevel: 80,
     category: "backend",
     icon: "/skills_icon/sql-logo.png",
-    description: "Gestión y consulta de bases de datos relacionales."
+    descriptionKey: "skills.sql.description"
   },
   {
-    title: 'DOCKER',
-    levelText: 'Uso Regular',
+    titleKey: 'skills.docker.title',
+    levelTextKey: 'levels.regularuse',
     dataLevel: 60,
     category: "backend",
     icon: "/skills_icon/docker-logo.png",
-    description: "Contenerización de aplicaciones para despliegues consistentes."
+    descriptionKey: "skills.docker.description"
   },
   {
-    title: 'GIT',
-    levelText: 'Uso Diario',
+    titleKey: 'skills.git.title',
+    levelTextKey: 'levels.dailyuse',
     dataLevel: 90,
     category: "backend",
     icon: "/skills_icon/git-logo.png",
-    description: "Control de versiones esencial para el desarrollo colaborativo."
+    descriptionKey: "skills.git.description"
   }
 ];
 
 export interface Project {
-  title: string;
-  description: string;
+  titleKey: TranslationKey;
+  descriptionKey: TranslationKey;
   tags: string[];
   imageUrl?: string;
   demoUrl?: string;
@@ -94,16 +96,16 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
-    title: "Travel Management System",
-    description: "Microservices application for managing travel, allowing users to search for and book flights, accommodations, and more, with secure authentication via Keycloak.",
+    titleKey: "projects.travelManagement.title",
+    descriptionKey: "projects.travelManagement.description",
     tags: ["Java", "Spring Boot", "PostgreSQL", "Docker", "Eureka", "RabbitMQ", "Keycloak"],
     imageUrl: "/images/travel-management.png",
     githubUrl: "https://github.com/santiagoBeltranF/TravelManagementSystem",
     completed: true,
   },
   {
-    title: "Recipe Master",
-    description: "Application for organizing cooking recipes, planning menus, generating shopping lists, and suggesting recipes from available ingredients.",
+    titleKey: "projects.recipeMaster.title",
+    descriptionKey: "projects.recipeMaster.description",
     tags: ["Python", "FastAPI", "Docker", "Alembic", "SQL"],
     imageUrl: "/images/recipe-master.png",
     githubUrl: "https://github.com/santiagoBeltranF/Recipe_Master",

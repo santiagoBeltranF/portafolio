@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html className="scroll-smooth"> 
       <head>
         <link rel="icon" href="/images/pixel-skill.png" />
       </head>

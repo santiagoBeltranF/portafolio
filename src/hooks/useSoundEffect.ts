@@ -1,6 +1,6 @@
 import { useCallback, useRef } from 'react';
 
-type SoundType = 'click' | 'navigate' | 'hover' | 'themeChange';
+type SoundType = 'click' | 'navigate' | 'hover' | 'themeChange' | 'languageChange';
 
 interface UseSoundEffectProps {
   volume?: number;
@@ -33,6 +33,9 @@ export function useSoundEffect(props?: UseSoundEffectProps) {
           case 'themeChange':
             soundFile = '/sounds/snap.mp3';
             break;
+          case 'languageChange':
+            soundFile = '/sounds/change-idiom.mp3';
+            break;
         }
 
         if (soundFile) {
@@ -45,7 +48,9 @@ export function useSoundEffect(props?: UseSoundEffectProps) {
           audio.volume = volume;
           
           audio.play().catch(error => {
-            console.error(`Error playing sound ${soundFile}:`, error);
+            if (error.name !== 'AbortError') {
+                console.error(`Error playing sound ${soundFile}:`, error);
+            }
           });
           audioRef.current = audio;
         }

@@ -3,8 +3,10 @@
 import React from "react";
 import { PixelButton } from "@/components/ui/pixel-button";
 import { useSoundEffect } from "@/hooks/useSoundEffect";
+import { useI18n } from "@/contexts/i18n-context"; 
 
 export function HeroSection() {
+  const { t } = useI18n(); 
   const { playSound, preloadSound } = useSoundEffect({ volume: 0.3 });
 
   React.useEffect(() => {
@@ -28,15 +30,15 @@ export function HeroSection() {
         <div className="mb-8 animate-float">
           <img
             src="/images/pixel-programmer.png"
-            alt="Programmer Avatar"
+            alt={t('about.avatar.title')}
             className="w-96 h-96 mx-auto object-contain"
           />
         </div>
         <h1 className="text-4xl md:text-6xl font-pixel text-primary mb-4">
-          SANTIAGO <span className="text-foreground">BELTRAN</span>
+          {t('hero.name')} <span className="text-foreground">{t('hero.lastname')}</span>
         </h1>
         <p className="text-lg md:text-xl font-pixel text-muted-foreground mb-8">
-          A Programmer's Portfolio Adventure
+          {t('hero.subtitle')}
         </p>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center">
@@ -44,14 +46,14 @@ export function HeroSection() {
             onClick={handleStartGameClick}
             size="lg"
           >
-            START GAME
+            {t('hero.startGame')}
           </PixelButton>
           <PixelButton
             variant="outline"
             onClick={handleContactClick}
             size="lg"
           >
-            CONTACT
+            {t('hero.contact')}
           </PixelButton>
         </div>
 
@@ -67,6 +69,7 @@ export function HeroSection() {
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
+              aria-hidden="true" 
             >
               <path d="M12 5v14M19 12l-7 7-7-7" />
             </svg>
