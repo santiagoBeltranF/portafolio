@@ -164,7 +164,7 @@ export function GameLayout({ children, className }: GameLayoutProps) {
               </div>
               <div className="flex justify-center md:justify-end mt-4 gap-4 sm:hidden">
                 <ThemeToggle />
-              </div>
+              </div>|
             </div>
           </div>
 
@@ -173,7 +173,7 @@ export function GameLayout({ children, className }: GameLayoutProps) {
               © {new Date().getFullYear()} SANTIAGO BELTRAN. ALL RIGHTS RESERVED.
             </p>
             <p className="text-xs text-muted-foreground/70 mt-1">
-              Designed & Coded with <span className="text-red-500 animate-pulse">❤</span> and Pixels.
+              Designed & Coded with <span className="text-red-500 animate-pulse">❤</span>
             </p>
           </div>
         </div>

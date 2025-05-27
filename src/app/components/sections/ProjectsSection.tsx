@@ -18,13 +18,15 @@ export function ProjectsSection() {
                 !project.completed ? 'opacity-70 grayscale' : ''
               }`}
             >
-              <div className="relative aspect-video overflow-hidden">
+              <div className="relative w-full h-56 overflow-hidden">
                 {project.imageUrl && (
-                  <img
-                    src={project.imageUrl}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="w-full h-full flex justify-center items-center pt-2">
+                    <img
+                      src={project.imageUrl}
+                      alt={project.title}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
                 )}
 
                 {!project.completed && (
