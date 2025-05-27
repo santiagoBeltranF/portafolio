@@ -89,7 +89,6 @@ export function AboutSection() {
               <Card className="p-4 pixel-corners">
                 <h3 className="font-pixel text-primary text-sm mb-2">{t('about.cards.abilities.title')}</h3>
                 <ul className="text-sm space-y-1">
-                  <li>{t('about.cards.abilities.item1')}</li>
                   <li>{t('about.cards.abilities.item2')}</li>
                   <li>{t('about.cards.abilities.item3')}</li>
                 </ul>
