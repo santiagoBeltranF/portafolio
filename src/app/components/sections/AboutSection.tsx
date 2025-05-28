@@ -9,7 +9,7 @@ import { useI18n } from "@/contexts/i18n-context";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export function AboutSection() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n(); 
 
   return (
     <section id="about" className="py-20 bg-background">
@@ -71,9 +71,10 @@ export function AboutSection() {
             <h2 className="text-2xl font-pixel text-primary mb-6">{t('about.characterProfile')}</h2>
 
             <DialogBox
+              key={`dialog-developer-${locale}`} 
               text={t('about.dialog.developer')}
               speaker={t('about.dialog.speaker')}
-              avatar="/images/pixel-programmer.png" 
+              avatar="/images/pixel-programmer.png"
               className="mb-6"
             />
 
