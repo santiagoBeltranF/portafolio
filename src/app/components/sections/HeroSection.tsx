@@ -5,6 +5,8 @@ import { PixelButton } from "@/components/ui/pixel-button";
 import { useSoundEffect } from "@/hooks/useSoundEffect";
 import { useI18n } from "@/contexts/i18n-context"; 
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export function HeroSection() {
   const { t } = useI18n(); 
   const { playSound, preloadSound } = useSoundEffect({ volume: 0.3 });
@@ -29,7 +31,7 @@ export function HeroSection() {
       <div className="game-container text-center relative z-10">
         <div className="mb-8 animate-float">
           <img
-            src="/images/pixel-programmer.png"
+            src={`${basePath}/images/pixel-programmer.png`}
             alt={t('about.avatar.title')}
             className="w-96 h-96 mx-auto object-contain"
           />

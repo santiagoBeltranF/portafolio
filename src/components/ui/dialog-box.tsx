@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 interface DialogBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
   speaker?: string;
@@ -17,7 +19,7 @@ export function DialogBox({
   typewriterEffect = true,
   typingSpeed = 40,
   onComplete,
-  avatar,
+  avatar, 
   className,
   ...props
 }: DialogBoxProps) {
@@ -41,13 +43,15 @@ export function DialogBox({
     onComplete?.();
   }, [currentCharIndex, text, typewriterEffect, typingSpeed, onComplete]);
 
+  const finalAvatarSrc = avatar && avatar.startsWith('/') ? `${basePath}${avatar}` : avatar;
+
   return (
     <Card className={cn("dialog-box flex flex-col overflow-hidden", className)} {...props}>
       {speaker && (
         <div className="flex items-center gap-3 px-3 py-2 font-pixel text-sm bg-muted mb-2">
-          {avatar && (
+          {finalAvatarSrc && (
             <img
-              src={avatar}
+              src={finalAvatarSrc}
               alt={speaker}
               className="w-8 h-8 object-contain rounded-full border-2 border-primary"
             />

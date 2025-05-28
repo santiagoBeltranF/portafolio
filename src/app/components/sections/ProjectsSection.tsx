@@ -5,6 +5,8 @@ import { Card } from "@/components/ui/card";
 import { projectsData, Project } from "@/data/portfolio-data";
 import { useI18n } from "@/contexts/i18n-context";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export function ProjectsSection() {
   const { t } = useI18n();
 
@@ -16,6 +18,8 @@ export function ProjectsSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projectsData.map((project: Project) => {
             const projectTitle = t(project.titleKey);
+            const finalImageUrl = project.imageUrl ? `${basePath}${project.imageUrl}` : undefined;
+
             return (
               <Card
                 key={project.titleKey}
@@ -24,10 +28,10 @@ export function ProjectsSection() {
                 }`}
               >
                 <div className="relative w-full h-56 overflow-hidden">
-                  {project.imageUrl && (
+                  {finalImageUrl && (
                     <div className="w-full h-full flex justify-center items-center pt-2">
                       <img
-                        src={project.imageUrl}
+                        src={finalImageUrl}
                         alt={projectTitle}
                         className="max-w-full max-h-full object-contain"
                       />
@@ -46,7 +50,7 @@ export function ProjectsSection() {
                     <h3 className="font-pixel text-primary text-lg">{projectTitle}</h3>
                     {project.completed && (
                       <img
-                        src="/images/pixel-heart.png"
+                        src={`${basePath}/images/pixel-heart.png`}
                         alt={t('projects.title')}
                         className="w-6 h-6 object-contain"
                       />

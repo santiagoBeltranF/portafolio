@@ -7,6 +7,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Code, Server } from "lucide-react";
 import { useI18n, TranslationKey } from "@/contexts/i18n-context";
 
+const basePathForSkills = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 interface SkillNodeProps {
   skill: SkillType;
 }
@@ -16,6 +18,7 @@ const SkillNode: React.FC<SkillNodeProps> = ({ skill }) => {
   const MAX_POINTS = 5;
   const filledPoints = Math.round((skill.dataLevel / 100) * MAX_POINTS);
   const skillTitle = t(skill.titleKey);
+  const finalIconSrc = skill.icon ? `${basePathForSkills}${skill.icon}` : `${basePathForSkills}/images/pixel-skill.png`;
 
   return (
     <TooltipProvider delayDuration={100}>
@@ -24,7 +27,7 @@ const SkillNode: React.FC<SkillNodeProps> = ({ skill }) => {
           <div className="skill-node group relative flex flex-col items-center p-3 sm:p-4 border-2 border-primary/30 bg-card/80 pixel-corners hover:bg-primary/10 hover:border-primary transition-all duration-200 cursor-default shadow-md hover:shadow-primary/30">
             <div className="relative w-12 h-12 sm:w-16 sm:h-16 mb-2 sm:mb-3 flex items-center justify-center">
               <img
-                src={skill.icon || "/images/pixel-skill.png"}
+                src={finalIconSrc}
                 alt={skillTitle}
                 className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-110"
               />

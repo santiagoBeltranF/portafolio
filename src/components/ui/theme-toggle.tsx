@@ -4,6 +4,8 @@ import React from "react";
 import { useTheme } from "@/contexts/theme-context";
 import { cn } from "@/lib/utils";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export function ThemeToggle({ className, ...props }: React.HTMLAttributes<HTMLButtonElement>) {
   const { theme, toggleTheme } = useTheme();
 
@@ -27,7 +29,7 @@ export function ThemeToggle({ className, ...props }: React.HTMLAttributes<HTMLBu
         )}
       >
         <img
-          src="/images/moon.png"
+          src={`${basePath}/images/moon.png`}
           alt="Moon"
           className="w-7 h-7 object-contain animate-pulse-pixel"
         />
@@ -40,7 +42,7 @@ export function ThemeToggle({ className, ...props }: React.HTMLAttributes<HTMLBu
         )}
       >
         <img
-          src="/images/sun.png"
+          src={`${basePath}/images/sun.png`}
           alt="Sun"
           className="w-7 h-7 object-contain animate-pulse-pixel"
         />

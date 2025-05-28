@@ -7,6 +7,8 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { useSoundEffect } from "@/hooks/useSoundEffect";
 import { useI18n, Locale, TranslationKey } from "@/contexts/i18n-context"; 
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 const MenuIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props} >
     <line x1="3" y1="12" x2="21" y2="12" /> <line x1="3" y1="6" x2="21" y2="6" /> <line x1="3" y1="18" x2="21" y2="18" />
@@ -127,7 +129,7 @@ export function Navbar() {
                 onClick={(e) => handleNavClick("#home", e)}
               >
                 <img
-                  src="/images/pixel-programmer.png"
+                  src={`${basePath}/images/pixel-programmer.png`}
                   alt={t("navbar.santiago")}
                   className="w-8 h-8 object-contain"
                 />

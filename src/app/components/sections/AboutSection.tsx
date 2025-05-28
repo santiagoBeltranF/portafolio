@@ -6,6 +6,8 @@ import { StatBar } from "@/components/ui/stat-bar";
 import { Card } from "@/components/ui/card";
 import { useI18n } from "@/contexts/i18n-context";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export function AboutSection() {
   const { t } = useI18n();
 
@@ -17,7 +19,7 @@ export function AboutSection() {
             <div className="pixel-corners bg-card p-6 border-2 border-primary">
               <div className="text-center mb-6">
                 <img
-                  src="/images/pixel-programmer.png"
+                  src={`${basePath}/images/pixel-programmer.png`}
                   alt={t('about.avatar.title')}
                   className="w-24 h-24 mx-auto object-contain mb-4"
                 />
@@ -71,7 +73,7 @@ export function AboutSection() {
             <DialogBox
               text={t('about.dialog.developer')}
               speaker={t('about.dialog.speaker')}
-              avatar="/images/pixel-programmer.png"
+              avatar="/images/pixel-programmer.png" 
               className="mb-6"
             />
 

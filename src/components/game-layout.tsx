@@ -8,6 +8,8 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Github, Linkedin } from "lucide-react";
 import { useI18n, TranslationKey } from "@/contexts/i18n-context";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 interface GameLayoutProps {
   children: React.ReactNode;
   className?: string;
@@ -25,6 +27,11 @@ export function GameLayout({ children, className }: GameLayoutProps) {
     { key: 'navbar.projects', href: '#projects' },
     { key: 'navbar.contact', href: '#contact' },
   ];
+
+  const footerBorderStyle = {
+    backgroundImage: `url("${basePath}/images/footer-border.svg")`,
+    backgroundSize: '20px 10px',
+  };
 
   return (
     <div className="min-h-screen flex flex-col relative">
@@ -105,17 +112,14 @@ export function GameLayout({ children, className }: GameLayoutProps) {
       <footer className="relative z-10 mt-24 border-t-4 border-primary/50 bg-background/70 backdrop-blur-sm shadow-2xl shadow-primary/20">
         <div 
           className="absolute inset-x-0 top-0 h-2 bg-repeat-x opacity-50"
-          style={{
-            backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='20' height='10' viewBox='0 0 20 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L10 10 L20 0 Z' fill='hsl(var(--primary))'/%3E%3C/svg%3E\")",
-            backgroundSize: '20px 10px',
-          }}
+          style={footerBorderStyle}
         />
         <div className="game-container py-12 px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-center">
             
             <div className="text-center md:text-left flex flex-col items-center md:items-start">
               <div className="flex items-center gap-3 mb-3">
-                <img src="/images/pixel-programmer.png" alt={t('footer.logoText')} className="w-10 h-10 object-contain" />
+                <img src={`${basePath}/images/pixel-programmer.png`} alt={t('footer.logoText')} className="w-10 h-10 object-contain" />
                 <h3 className="font-pixel text-xl text-primary">{t('footer.logoText')}</h3>
               </div>
               <p className="text-sm text-muted-foreground font-pixel tracking-wider">

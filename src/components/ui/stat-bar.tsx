@@ -2,6 +2,8 @@ import type React from "react";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 type StatBarType = "health" | "mana" | "experience" | "skill";
 
 interface StatBarProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -54,7 +56,7 @@ export function StatBar({
       <div className="flex items-center gap-2">
         {showIcon && icons[type] && (
           <img
-            src={icons[type]}
+            src={`${basePath}${icons[type]}`}
             alt={`${type} icon`}
             className="w-6 h-6 object-contain"
           />

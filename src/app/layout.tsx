@@ -2,9 +2,14 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export const metadata: Metadata = {
   title: "Portfolio | Santiago",
   description: "A video game themed portfolio for a programmer with pixel art style and pastel red color scheme.",
+  icons: {
+    icon: `${basePath}/images/pixel-skill.png`,
+  }
 };
 
 export default function RootLayout({
@@ -13,9 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="scroll-smooth"> 
+    <html className="scroll-smooth">
       <head>
-        <link rel="icon" href="/images/pixel-skill.png" />
       </head>
       <body>
         <Providers>{children}</Providers>
